@@ -20,12 +20,12 @@ body {
 }
 
 #container-wrapper {
-    background: rgba(255, 255, 255, 0.05);
+    background: #ffffff0c;
     border-radius: 16px;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 30px #00000019;
     backdrop-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
-    border: 1px solid rgba(255, 255, 255, 0.24);
+    border: 1px solid #ffffff3d;
     width: 60%;
     height: 65vh;
     margin: auto;
@@ -68,4 +68,12 @@ p {
     color: #000;
     background: #30FFD2;
     background: linear-gradient(to right, #30FFD2, #68ff75);
+}
+
+.divider {
+    height: 1px;
+    width: 100%;
+    background-color: #ffffff0e;
+    border-radius: 5px;
+    margin: 10px 0;
 }
