@@ -630,6 +630,45 @@ function saveQuotes() {
     localStorage.setItem('quotes', JSON.stringify(quotes));
 }
 
+// Populate categories in the filter dropdown
+function populateCategories() {
+    const select = document.getElementById('categoryFilter');
+    select.innerHTML = '<option value="all">All Categories</option>';
+    const categories = [...new Set(quotes.map(q => q.category))];
+    categories.forEach(category => {
+        const option = document.createElement('option');
+        option.value = category.toLowerCase();
+        option.textContent = category;
+        select.appendChild(option);
+    });
+}
+
+// Function to display quotes based on the selected category
+function filterQuotes() {
+    const category = document.getElementById('categoryFilter').value;
+    const quoteDisplay = document.getElementById('quoteDisplay');
+    quoteDisplay.innerHTML = '';
+    let filteredQuotes = [];
+    if (category === 'all') {
+        quotes.forEach(q => filteredQuotes.push(...q.quotes));
+    } else {
+        const categoryObj = quotes.find(q => q.category.toLowerCase() === category.toLowerCase());
+        if (categoryObj) {
+            filteredQuotes = categoryObj.quotes;
+        }
+    }
+    filteredQuotes.forEach(quote => {
+        const quoteElement = document.createElement('div');
+        quoteElement.innerHTML = `
+            <p>"${quote.text}"</p>
+            <p>- ${quote.author}</p>
+        `;
+        quoteDisplay.appendChild(quoteElement);
+    });
+    // Save the selected filter to local storage
+    localStorage.setItem('selectedCategory', category);
+}
+
 // Function to display a random quote from the selected category
 function showRandomQuote() {
     const category = document.getElementById('quoteCat').value;
