@@ -10,13 +10,29 @@
     <div id="container-wrapper">
       <h1>Dynamic Quote Generator</h1>
       <p class="info">
-      Choose a category to generate an inspirating quote from or add your favorite quote below.
+        Choose a category to generate an inspiring quote or add your favorite quote below.
       </p>
-      <div id="quoteDisplay">
-        <div class="divider"></div>
-        <div class="divider"></div>
+      <div class="catDiv">
+        <h3>Categories</h3>
+        <select name="quoteCat" id="quoteCat">
+          <option value="success">Success</option>
+          <option value="motivation">Motivation</option>
+          <option value="wisdom">Wisdom</option>
+          <option value="relationship">Relationship</option>
+          <option value="funny">Funny</option>
+        </select>
       </div>
-      <button id="newQuote">Show New Quote</button>
+      <button id="newQuote" class="btn">Show New Quote</button>
+
+      <div id="quoteDisplay"></div>
+
+      <div class="addQuoteForm">
+        <h3>Add New Quote</h3>
+        <input id="newQuoteText" type="text" placeholder="Enter a new quote" />
+        <input id="newQuoteAuthor" type="text" placeholder="Enter author name" />
+        <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
+        <button id="addQuoteBtn" class="btn">Add Quote</button>
+      </div>
     </div>
     <script src="script.js"></script>
   </body>
