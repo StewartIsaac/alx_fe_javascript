@@ -78,7 +78,7 @@ p {
     width: 100%;
     background-color: #ffffff0e;
     border-radius: 0.3em;
-    margin: 0.6em 0;
+    margin: 1em 0;
 }
 
 .catDiv {
@@ -130,4 +130,37 @@ select {
 
 .addQuoteForm button {
     margin-top: 0.2em;
+}
+
+#exportDiv {
+    display: flex;
+    flex-direction: row;
+    margin-top: 1em;
+    align-items: left;
+    justify-content: space-between;
+}
+
+#importFile {
+    font-family: "Space Grotesk", sans-serif;
+}
+
+#exportBtn {
+    margin-left: 0;
+    margin-top: 0.5em;
+    padding: 0 0.4em;
+    width: max-content;
+    height: 2.5em;
+
+}
+
+#exportDiv input {
+    margin: 0.5em 0;
+    padding: 0.5em;
+    width: 21.5em;
+    height: 2.5em;
+    border-radius: 0.3em;
+    border: 1px solid #ffffff3d;
+    background: #ffffff0c;
+    color: #fff;
+    outline: none;
 }
