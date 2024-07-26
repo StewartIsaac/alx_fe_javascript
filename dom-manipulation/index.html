@@ -21,6 +21,10 @@
           <option value="relationship">Relationship</option>
           <option value="funny">Funny</option>
         </select>
+        <select id="categoryFilter" onchange="filterQuotes()">
+          <option value="all">All Categories</option>
+          <!-- Dynamically populated categories -->
+      </select>
       </div>
       <button id="newQuote" class="btn">Show New Quote</button>
 
@@ -32,9 +36,7 @@
         <input id="newQuoteAuthor" type="text" placeholder="Enter author name" />
         <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
         <button id="addQuoteBtn" class="btn">Add Quote</button>
-      </div>
-      <div class="divider"></div>
-      <div id="exportDiv">
+        <div class="divider"></div>
         <input type="file" id="importFile" accept=".json" />
         <button id="exportBtn" class="btn">Export Quotes</button>
       </div>
