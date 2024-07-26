@@ -750,8 +750,64 @@ function importFromJsonFile(event) {
     fileReader.readAsText(event.target.files[0]);
 }
 
+// Function to fetch quotes from the server
+async function fetchQuotesFromServer() {
+    try {
+        const response = await fetch(serverUrl);
+        const serverQuotes = await response.json();
+        // Merge server quotes with local quotes
+        serverQuotes.forEach(serverQuote => {
+            const categoryObj = quotes.find(q => q.category.toLowerCase() === serverQuote.category.toLowerCase());
+            if (categoryObj) {
+                if (!categoryObj.quotes.some(q => q.text === serverQuote.text && q.author === serverQuote.author)) {
+                    categoryObj.quotes.push({ text: serverQuote.text, author: serverQuote.author });
+                }
+            } else {
+                quotes.push({
+                    category: serverQuote.category,
+                    quotes: [{ text: serverQuote.text, author: serverQuote.author }]
+                });
+            }
+        });
+        saveQuotes();
+        populateCategories();
+        filterQuotes();
+    } catch (error) {
+        console.error('Error fetching quotes from server:', error);
+    }
+}
+
+// Function to post a new quote to the server
+async function postQuoteToServer(quote) {
+    try {
+        await fetch(serverUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(quote)
+        });
+    } catch (error) {
+        console.error('Error posting quote to server:', error);
+    }
+}
+
+
 // Load quotes from local storage on initialization
 loadQuotes();
+populateCategories();
+
+// Restore the last selected filter
+const selectedCategory = localStorage.getItem('selectedCategory');
+if (selectedCategory) {
+    document.getElementById('categoryFilter').value = selectedCategory;
+    filterQuotes();
+} else {
+    filterQuotes();
+}
+
+// Periodically fetch quotes from the server
+setInterval(fetchQuotesFromServer, 60000); // Fetch every 60 seconds
 
 // Event listeners
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
