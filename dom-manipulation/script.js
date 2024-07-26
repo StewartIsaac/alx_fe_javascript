@@ -1,4 +1,4 @@
-// Quotes array
+// Quote array
 let quotes = [
     {
         "category": "success",
@@ -634,7 +634,7 @@ function showRandomQuote() {
 }
 
 // Function to add a new quote
-function addQuote() {
+function createAddQuoteForm() {
     const text = document.getElementById('newQuoteText').value;
     const author = document.getElementById('newQuoteAuthor').value;
     const category = document.getElementById('newQuoteCategory').value;
@@ -670,7 +670,7 @@ function addCategoryToSelect(category) {
 
 // Event listeners
 document.getElementById('newQuote').addEventListener('click', showRandomQuote);
-document.getElementById('addQuoteBtn').addEventListener('click', addQuote);
+document.getElementById('addQuoteBtn').addEventListener('click', createAddQuoteForm);
 
 // Initialize with a random quote
 showRandomQuote();
