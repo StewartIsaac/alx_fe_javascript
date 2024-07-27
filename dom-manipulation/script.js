@@ -781,7 +781,7 @@ async function fetchQuotesFromServer() {
 }
 
 // Function to sync local data with the server
-async function syncData() {
+async function syncQuotes() {
     const localQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
     const serverQuotes = await fetchQuotesFromServer();
 
@@ -812,7 +812,7 @@ async function syncData() {
 }
 
 // Periodic data fetching
-setInterval(syncData, 60000); // Sync every 60 seconds
+setInterval(syncQuotes, 60000); // Sync every 60 seconds
 
 // Function to notify user
 function notifyUser(message) {
