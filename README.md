@@ -24,7 +24,7 @@ This project is a dynamic quote generator web app built with HTML, CSS, and Java
 The UI utilizes glass morphism, gradient font and buttons, and a modern font, Space Grotesk, for a clean and elegant look. 
 
 ### Screenshots: 
-![image](https://github.com/user-attachments/assets/693be6f2-f78d-485e-b240-debfd9388460)
+![image](https://github.com/user-attachments/assets/ba538374-6ab4-478e-bab3-28ffc5a0d0dd)
 ![image](https://github.com/user-attachments/assets/befc2ae9-a7e5-4c07-b6a0-837092bfbb11)
 ![image](https://github.com/user-attachments/assets/4ccb0186-b18e-4019-bc41-76811e357dff)
 
