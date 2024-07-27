@@ -758,25 +758,28 @@ async function fetchQuotesFromServer() {
     try {
         const response = await fetch(serverUrl);
         const serverQuotes = await response.json();
-        // Merge server quotes with local quotes
-        serverQuotes.forEach(serverQuote => {
-            const categoryObj = quotes.find(q => q.category.toLowerCase() === serverQuote.category.toLowerCase());
-            if (categoryObj) {
-                if (!categoryObj.quotes.some(q => q.text === serverQuote.text && q.author === serverQuote.author)) {
-                    categoryObj.quotes.push({ text: serverQuote.text, author: serverQuote.author });
-                }
-            } else {
-                quotes.push({
-                    category: serverQuote.category,
-                    quotes: [{ text: serverQuote.text, author: serverQuote.author }]
-                });
-            }
-        });
-        saveQuotes();
-        populateCategories();
-        filterQuotes();
+        return serverQuotes;
     } catch (error) {
         console.error('Error fetching quotes from server:', error);
+        return [];
+    }
+}
+
+// Function to post a new quote to the server
+async function postQuoteToServer(quote) {
+    try {
+        const response = await fetch(serverUrl, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(quote)
+        });
+        const newQuote = await response.json();
+        return newQuote;
+    } catch (error) {
+        console.error('Error posting quote to server:', error);
+        return null;
     }
 }
 
