@@ -750,6 +750,9 @@ function importFromJsonFile(event) {
     fileReader.readAsText(event.target.files[0]);
 }
 
+// Declare server URL
+const serverUrl = 'https://jsonplaceholder.typicode.com/posts';
+
 // Function to fetch quotes from the server
 async function fetchQuotesFromServer() {
     try {
