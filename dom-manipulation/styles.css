@@ -164,6 +164,16 @@ select {
     font-family: "Space Grotesk", sans-serif;
 }
 
+.resolveDiv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+#notification {
+    font-size: 0.7em;
+}
+
 #resolveBtn {
     height: 2.5em;
     border-radius: 0.3em;
@@ -177,5 +187,7 @@ select {
     padding: 0.5em 1.5em;
     border-radius: 0.6em;
     cursor: pointer;
-    margin-left: auto;
+    margin-right: 1em;
+    font-size: 0.7em;
+    width: 20em;
 }
