@@ -17,6 +17,7 @@ body {
     font-weight: 300;
     font-style: normal;
     color: #fff;
+    font-size: 1em;
 }
 
 #container-wrapper {
@@ -141,7 +142,6 @@ select {
     background: #ffffff0c;
     color: #fff;
     outline: none;
-
 }
 
 .addQuoteForm button {
@@ -156,6 +156,26 @@ select {
     justify-content: space-between;
 }
 
+#exportBtn {
+    margin-bottom: 0.5em;
+}
+
 #importFile {
     font-family: "Space Grotesk", sans-serif;
+}
+
+#resolveBtn {
+    height: 2.5em;
+    border-radius: 0.3em;
+    border: 1px solid #ffffff3d;
+    background: #04df0f5b;
+    color: #fff;
+    outline: none;
+    color: #fff;
+    font-size: 0.9em;
+    font-weight: 600;
+    padding: 0.5em 1.5em;
+    border-radius: 0.6em;
+    cursor: pointer;
+    margin-left: auto;
 }

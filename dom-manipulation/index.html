@@ -37,12 +37,13 @@
         <input id="newQuoteCategory" type="text" placeholder="Enter quote category" />
         <button id="addQuoteBtn" class="btn">Add Quote</button>
         <div class="divider"></div>
-        
+
         <input type="file" id="importFile" accept=".json" />
         <button id="exportBtn" class="btn">Export Quotes</button>
 
+        <div class="divider"></div>
+        <button onclick="resolveConflictsManually()" id="resolveBtn">Resolve Conflicts Manually</button>
         <div id="notification"></div>
-        <button onclick="resolveConflictsManually()">Resolve Conflicts Manually</button>
       </div>
     </div>
     <script src="script.js"></script>
