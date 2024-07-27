@@ -809,7 +809,7 @@ async function syncQuotes() {
     });
 
     localStorage.setItem('quotes', JSON.stringify(localQuotes));
-    notifyUser('Quotes synced with server.');
+    notifyUser('Quotes synced with server!');
     populateCategories();
     filterQuotes();
 }
