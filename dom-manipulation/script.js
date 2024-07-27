@@ -1,6 +1,9 @@
 // Quote array
 let quotes = [];
 
+// Declare server URL
+const serverUrl = 'https://jsonplaceholder.typicode.com/posts';
+
 // Load quotes from local storage
 function loadQuotes() {
     const storedQuotes = localStorage.getItem('quotes');
@@ -750,9 +753,6 @@ function importFromJsonFile(event) {
     fileReader.readAsText(event.target.files[0]);
 }
 
-// Declare server URL
-const serverUrl = 'https://jsonplaceholder.typicode.com/posts';
-
 // Function to fetch quotes from the server
 async function fetchQuotesFromServer() {
     try {
@@ -780,21 +780,56 @@ async function fetchQuotesFromServer() {
     }
 }
 
-// Function to post a new quote to the server
-async function postQuoteToServer(quote) {
-    try {
-        await fetch(serverUrl, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(quote)
-        });
-    } catch (error) {
-        console.error('Error posting quote to server:', error);
-    }
+// Function to sync local data with the server
+async function syncData() {
+    const localQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
+    const serverQuotes = await fetchQuotesFromServer();
+
+    // Simple conflict resolution: server data takes precedence
+    serverQuotes.forEach(serverQuote => {
+        const categoryObj = localQuotes.find(q => q.category.toLowerCase() === serverQuote.category.toLowerCase());
+        if (categoryObj) {
+            const localQuote = categoryObj.quotes.find(q => q.text === serverQuote.text && q.author === serverQuote.author);
+            if (localQuote) {
+                // Conflict detected, resolve by taking server data
+                localQuote.text = serverQuote.text;
+                localQuote.author = serverQuote.author;
+            } else {
+                categoryObj.quotes.push({ text: serverQuote.text, author: serverQuote.author });
+            }
+        } else {
+            localQuotes.push({
+                category: serverQuote.category,
+                quotes: [{ text: serverQuote.text, author: serverQuote.author }]
+            });
+        }
+    });
+
+    localStorage.setItem('quotes', JSON.stringify(localQuotes));
+    notifyUser('Data synced with server.');
+    populateCategories();
+    filterQuotes();
 }
 
+// Periodic data fetching
+setInterval(syncData, 60000); // Sync every 60 seconds
+
+// Function to notify user
+function notifyUser(message) {
+    const notificationDiv = document.getElementById('notification');
+    notificationDiv.innerText = message;
+}
+
+// Function to manually resolve conflicts
+async function resolveConflictsManually() {
+    const localQuotes = JSON.parse(localStorage.getItem('quotes')) || [];
+    const serverQuotes = await fetchQuotesFromServer();
+
+    // Display conflicts and allow user to resolve them
+    console.log('Local Quotes:', localQuotes);
+    console.log('Server Quotes:', serverQuotes);
+    notifyUser('Conflicts displayed in console for manual resolution.');
+}
 
 // Load quotes from local storage on initialization
 loadQuotes();
